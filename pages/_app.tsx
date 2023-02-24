@@ -1,6 +1,17 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
+import "@/styles/globals.css";
+import type { AppProps } from "next/app";
+import { SessionProvider } from "next-auth/react";
+import { Provider } from "react-redux";
+import { wrapper } from "@/redux/store";
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />
-}
+const App = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
+  return (
+    <SessionProvider session={session}>
+      {/* <Provider store={store}> */}
+      <Component {...pageProps} />
+      {/* </Provider> */}
+    </SessionProvider>
+  );
+};
+
+export default wrapper.withRedux(App);
