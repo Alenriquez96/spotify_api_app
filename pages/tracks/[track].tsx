@@ -1,11 +1,11 @@
 import SearchBar from "@/components/SearchBar";
-import UserDropDown from "@/components/UserDropDown";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import useSpotify from "@/hooks/useSpotify";
 import Lyrics from "@/components/Lyrics";
 import SimilarTracks from "@/components/SimilarTracks";
+import millisToMinutesAndSeconds from "@/utils/millisToMinutesAndSeconds";
 
 const track = () => {
   const router = useRouter();
@@ -32,19 +32,11 @@ const track = () => {
     if (track && track.length) fetchTrackInfo();
   }, [track]);
 
-  function millisToMinutesAndSeconds(millis: number) {
-    let minutes = Math.floor(millis / 60000);
-    let seconds: any = ((millis % 60000) / 1000).toFixed(0);
-    return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
-  }
-
   return (
     <main className="text-white bg-[#383838] font-roboto min-h-screen min-w-[100vw]">
       <div className="bg-gradient-to-b to-[#383838] from-indigo-500  flex flex-col flex-wrap  items-center">
-        <div className="flex items-center w-[100%] justify-evenly">
-          <SearchBar />
-          <UserDropDown />
-        </div>
+        <SearchBar />
+
         <div className="min-w-[527px] flex items-center justify-between px-10 my-16">
           <div className="flex items-center">
             <p className="mx-2">1</p>

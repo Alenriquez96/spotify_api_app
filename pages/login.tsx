@@ -39,50 +39,6 @@ const login = ({ providers }: any) => {
             </div>
           ))}
         </div>
-        <footer
-          className="absolute bottom-0 w-96 h-16 bg-gray-300 rounded-t-md"
-          style={{
-            textAlign: "center",
-            display: "flex",
-            marginTop: "1rem",
-            justifyContent: "space-evenly",
-            alignItems: "center",
-          }}
-        >
-          <a
-            href="https://github.com/Ajay-056/Spotify-Clone-NextJS-12"
-            target="_blank noreferrer"
-          >
-            <Image
-              src="/icons8-github.svg"
-              alt="github"
-              height={40}
-              width={40}
-            />
-          </a>
-          <a
-            href="https://www.twitter.com/balaajay19"
-            target="_blank noreferrer"
-          >
-            <Image
-              src="/icons8-twitter-48.png"
-              alt="twitter"
-              height={40}
-              width={40}
-            />
-          </a>
-          <a
-            href="https://www.linkedin.com/in/ajay-krishna-065a1a162"
-            target="_blank noreferrer"
-          >
-            <Image
-              src="/icons8-linkedin-48.png"
-              alt="linkedin"
-              height={40}
-              width={40}
-            />
-          </a>
-        </footer>
       </div>
     );
   };

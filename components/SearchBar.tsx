@@ -2,22 +2,28 @@ import useSpotify from "@/hooks/useSpotify";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { addArtistId, addTopTracks } from "@/redux/actions/actions";
+import { addArtistId, addTopTracks, addSearch } from "@/redux/actions/actions";
 import { artistIdState } from "@/lib/interfaces";
 import { useRouter } from "next/router";
+import UserDropDown from "@/components/UserDropDown";
 
-type Artist = string;
+type Search = string;
+
+type SearchBarState = { searchBar: { search: string } };
 
 const SearchBar = () => {
   const router = useRouter();
   const spotifyApi = useSpotify();
-  const [search, setSearch] = useState<Artist>("");
+  const [search, setSearch] = useState<Search>("");
   const [results, setResults]: any = useState({});
-  const [type, setType] = useState("album");
 
   const artistId = useSelector(
     (state: artistIdState) => state.artistId.artistId
   );
+  const searchBarState = useSelector(
+    (state: SearchBarState) => state.searchBar.search
+  );
+
   const dispatch = useDispatch();
 
   const headers = { Authorization: `Bearer ${spotifyApi.getAccessToken()}` };
@@ -35,13 +41,12 @@ const SearchBar = () => {
       const response = await axios.get(
         `https://api.spotify.com/v1/search?q=${encodeURIComponent(
           search
-        )}&type=${type}`,
+        )}&type=${searchBarState}`,
         {
           headers,
         }
       );
       const results = await response.data;
-      console.log(results);
 
       setResults(results);
     } catch (error) {
@@ -74,6 +79,7 @@ const SearchBar = () => {
 
             return (
               <div
+                title={item.name}
                 className="bg-[#181818] w-[300px] h-[60px] flex justify-evenly  flex-wrap text-white rounded-[20px] cursor-pointer items-center hover:bg-[#242424] m-1 relative"
                 key={i}
                 onClick={() => {
@@ -99,6 +105,7 @@ const SearchBar = () => {
                   <h2 className="font-medium text-[20px] truncate pr-3">
                     {item.name}
                   </h2>
+                  <p className="text-[13px] text-gray-400">Song</p>
                 </div>
               </div>
             );
@@ -117,6 +124,7 @@ const SearchBar = () => {
             let length: number = item.images.length - 1;
             return (
               <div
+                title={item.name}
                 className="bg-[#181818] w-[300px] h-[60px] flex justify-evenly  flex-wrap text-white rounded-[20px] cursor-pointer items-center hover:bg-[#242424] m-1 relative"
                 key={i}
                 onClick={() => {
@@ -160,6 +168,7 @@ const SearchBar = () => {
             let length: number = item.images.length - 1;
             return (
               <div
+                title={item.name}
                 className="bg-[#181818] w-[300px] h-[60px] flex justify-evenly  flex-wrap text-white rounded-[20px] cursor-pointer items-center hover:bg-[#242424] m-1 relative"
                 key={i}
                 onClick={() => {
@@ -182,8 +191,10 @@ const SearchBar = () => {
                   ""
                 )}
                 <div className="text-start pl-[95px] min-w-full">
-                  <h2 className="font-medium text-[20px] ">{item.name}</h2>
-                  <p className="text-[13px] text-gray-400">Artist</p>
+                  <h2 className="font-medium text-[20px] truncate pr-3">
+                    {item.name}
+                  </h2>
+                  <p className="text-[13px] text-gray-400">Album</p>
                 </div>
               </div>
             );
@@ -202,6 +213,7 @@ const SearchBar = () => {
             let length: number = item.images.length - 1;
             return (
               <div
+                title={item.name}
                 className="bg-[#181818] w-[300px] h-[60px] flex justify-evenly  flex-wrap text-white rounded-[20px] cursor-pointer items-center hover:bg-[#242424] m-1 relative"
                 key={i}
                 onClick={() => {
@@ -211,6 +223,7 @@ const SearchBar = () => {
                     typeof document !== "undefined" &&
                     document.getElementById("searchInput");
                   if (input) input.value = "";
+                  router.push(`/playlists/${item.id}`);
                 }}
               >
                 {item.images[length] ? (
@@ -223,8 +236,10 @@ const SearchBar = () => {
                   ""
                 )}
                 <div className="text-start pl-[95px] min-w-full">
-                  <h2 className="font-medium text-[20px] ">{item.name}</h2>
-                  <p className="text-[13px] text-gray-400">Artist</p>
+                  <h2 className="font-medium text-[20px] truncate pr-3">
+                    {item.name}
+                  </h2>
+                  <p className="text-[13px] text-gray-400">Playlist</p>
                 </div>
               </div>
             );
@@ -243,6 +258,7 @@ const SearchBar = () => {
             let length: number = item.images.length - 1;
             return (
               <div
+                title={item.name}
                 className="bg-[#181818] w-[300px] h-[60px] flex justify-evenly  flex-wrap text-white rounded-[20px] cursor-pointer items-center hover:bg-[#242424] m-1 relative"
                 key={i}
                 onClick={() => {
@@ -252,6 +268,7 @@ const SearchBar = () => {
                     typeof document !== "undefined" &&
                     document.getElementById("searchInput");
                   if (input) input.value = "";
+                  router.push(`/shows/${item.id}`);
                 }}
               >
                 {item.images[length] ? (
@@ -264,8 +281,10 @@ const SearchBar = () => {
                   ""
                 )}
                 <div className="text-start pl-[95px] min-w-full">
-                  <h2 className="font-medium text-[20px] ">{item.name}</h2>
-                  <p className="text-[13px] text-gray-400">Artist</p>
+                  <h2 className="font-medium text-[20px] truncate pr-3">
+                    {item.name}
+                  </h2>
+                  <p className="text-[13px] text-gray-400">Show</p>
                 </div>
               </div>
             );
@@ -277,45 +296,49 @@ const SearchBar = () => {
   };
 
   return (
-    <div className="my-[20px] flex flex-col items-center flex-wrap">
-      <div>
-        <div className="relative flex items-center">
-          <input
-            className="shadow-2xl w-[250px] h-[40px] bg-[#FFFFFF] rounded-l-[55px] text-[#000000] px-14 sm:w-[364px]"
-            type="text"
-            placeholder="Search artists, songs and playlists"
-            id="searchInput"
-            onChange={handleChange}
-          />
-          <select
-            onClick={(e: any) => setType(e.target.value)}
-            className="shadow-2xl h-[40px] bg-[#FFFFFF] rounded-r-[55px] text-[#000000] px-5"
-          >
-            {categories.map((category, i) => (
-              <option key={i} value={category}>
-                {category}
-              </option>
-            ))}
-          </select>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="black "
-            className="w-6 h-6 absolute left-3"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+    <div className="flex items-center w-[100%] justify-evenly">
+      <div className="my-[20px] flex flex-col items-center flex-wrap">
+        <div>
+          <div className="relative flex items-center">
+            <input
+              className="shadow-2xl w-[250px] h-[40px] bg-[#FFFFFF] rounded-l-[55px] text-[#000000] px-14 sm:w-[364px]"
+              type="text"
+              placeholder="Search artists, songs and playlists"
+              id="searchInput"
+              onChange={handleChange}
             />
-          </svg>
+            <select
+              value={searchBarState}
+              onChange={(e: any) => dispatch(addSearch(e.target.value))}
+              className="shadow-2xl h-[40px] bg-[#FFFFFF] rounded-r-[55px] text-[#000000] px-5"
+            >
+              {categories.map((category, i) => (
+                <option key={i} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="black "
+              className="w-6 h-6 absolute left-3"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+              />
+            </svg>
+          </div>
+        </div>
+        <div className="flex flex-col items-center justify-evenly w-[364px] absolute top-[75px] bg-transparent">
+          {chooseCase()}
         </div>
       </div>
-      <div className="flex flex-col items-center justify-evenly w-[364px] absolute top-[75px] bg-transparent">
-        {chooseCase()}
-      </div>
+      <UserDropDown />
     </div>
   );
 };

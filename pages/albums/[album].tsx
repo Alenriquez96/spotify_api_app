@@ -4,7 +4,6 @@ import useSpotify from "@/hooks/useSpotify";
 import { useEffect, useState } from "react";
 import AlbumTracks from "@/components/AlbumTracks";
 import SearchBar from "@/components/SearchBar";
-import UserDropDown from "@/components/UserDropDown";
 
 type AlbumData =
   | {
@@ -42,14 +41,29 @@ const album = () => {
 
   return (
     <main className="min-h-screen min-w-[100vw] bg-[#383838] font-roboto text-white">
-      <div className="bg-gradient-to-b to-[#383838] from-indigo-500 min-h-[390px] flex flex-col flex-wrap justify-between items-center">
-        <div className="flex items-center w-[100%] justify-evenly">
-          <SearchBar />
-          <UserDropDown />
+      <div className="bg-gradient-to-b to-[#383838] from-indigo-500 min-h-[390px] flex flex-col flex-wrap  items-center">
+        <SearchBar />
+        <div className="px-[10%] py-10 flex flex-col items-center">
+          {albumData.images && (
+            <img
+              className="h-[200px] w-[200px] mx-3 shadow-2xl"
+              src={albumData.images[0].url}
+            />
+          )}
+          <h1 className=" text-[40px] font-semibold tracking-[4px] ">
+            {albumData.name}
+          </h1>
+          <div className="flex flex-col items-end w-[100%]">
+            {albumData.release_date && (
+              <p className="text-gray-400">
+                {albumData.release_date.slice(0, 4)}
+              </p>
+            )}
+            {albumData.label && (
+              <p className="text-gray-400">{albumData.label}</p>
+            )}
+          </div>
         </div>
-        <h1 className="pl-[10%] text-[40px] font-semibold tracking-[4px] py-10">
-          ALBUM TRACKS
-        </h1>
       </div>
       {albumData.tracks ? (
         <AlbumTracks tracks={albumData.tracks.items} cover={albumData.images} />

@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { topTracksState } from "@/lib/interfaces";
 import { addUri } from "@/redux/actions/actions";
 import { useRouter } from "next/router";
+import millisToMinutesAndSeconds from "@/utils/millisToMinutesAndSeconds";
 
 const TrackList = () => {
   const router = useRouter();
@@ -9,12 +10,6 @@ const TrackList = () => {
   const topTracks = useSelector(
     (state: topTracksState) => state.topTracks.topTracks
   );
-
-  function millisToMinutesAndSeconds(millis: number) {
-    var minutes = Math.floor(millis / 60000);
-    var seconds: any = ((millis % 60000) / 1000).toFixed(0);
-    return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
-  }
 
   return (
     <div className="max-w-[1000px] lg:w-[50%] flex flex-col">

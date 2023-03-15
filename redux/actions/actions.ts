@@ -24,3 +24,8 @@ export const addUri = (uri: string) => ({
   type: Types.ADDURI,
   payload: uri,
 });
+
+export const addSearch = (search: string) => ({
+  type: Types.ADDSEARCH,
+  payload: search,
+});

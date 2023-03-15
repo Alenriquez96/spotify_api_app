@@ -17,7 +17,6 @@ const SimilarTracks = () => {
         { headers }
       );
       const data = response.data;
-      console.log(data);
 
       setSimilarTracks(data);
     } catch (error) {
@@ -30,7 +29,7 @@ const SimilarTracks = () => {
   }, [track]);
 
   return (
-    <div className="bg-[#2b2929] overflow-x-scroll">
+    <div className="bg-[#2b2929] overflow-x-scroll m-[20px] rounded-lg">
       {similarTracks.tracks ? (
         <h2 className="pl-[10%] text-[40px] font-semibold tracking-[4px] my-10">
           SIMILAR SONGS
@@ -38,22 +37,30 @@ const SimilarTracks = () => {
       ) : (
         ""
       )}
-      <div className="flex">
+      <div className="flex max-w-[1000px] overflow-x-scroll mx-[10%]">
         {similarTracks.tracks
           ? similarTracks.tracks.map((track: any, i: number) => {
               return (
-                <div>
+                <div
+                  key={i}
+                  onClick={() => router.push(`/tracks/${track.id}`)}
+                  className="mx-2 max-h-[250px] cursor-pointer"
+                >
                   {track.album ? (
                     <img
-                      className="rounded-lg"
+                      className="rounded-lg h-[100px] min-w-[100px]"
                       src={track.album.images[1].url}
                     />
                   ) : (
                     ""
                   )}
-                  <p>{track.name}</p>
-                  {track.artists.map((artist: any, i: number) => {
-                    return <p>{artist.name}</p>;
+                  <p key={i}>{track.name}</p>
+                  {track.artists.map((artist: { name: string }, j: number) => {
+                    return (
+                      <p className="text-gray-400" key={j}>
+                        {artist.name}
+                      </p>
+                    );
                   })}
                 </div>
               );

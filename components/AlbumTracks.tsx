@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import millisToMinutesAndSeconds from "@/utils/millisToMinutesAndSeconds";
 
 type Tracks = {
   tracks: {
@@ -13,12 +14,6 @@ type Tracks = {
 
 const AlbumTracks = ({ tracks, cover }: Tracks) => {
   const router = useRouter();
-
-  function millisToMinutesAndSeconds(millis: number) {
-    let minutes = Math.floor(millis / 60000);
-    let seconds: any = ((millis % 60000) / 1000).toFixed(0);
-    return minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
-  }
 
   return (
     <div className="flex flex-col max-w-[1000px]">
