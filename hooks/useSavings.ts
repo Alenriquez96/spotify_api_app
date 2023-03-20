@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import useSpotify from "./useSpotify";
 
-function useSavings(endpoint: string, accessToken: string) {
+function useSavings(endpoint: string) {
   const spotifyApi = useSpotify();
   const [savings, setSavings] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);

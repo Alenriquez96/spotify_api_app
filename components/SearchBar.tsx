@@ -301,7 +301,7 @@ const SearchBar = () => {
         <div>
           <div className="relative flex items-center">
             <input
-              className="shadow-2xl w-[215px] h-[40px] bg-[#FFFFFF] rounded-l-[55px] text-[#000000] pl-14 sm:w-[364px]"
+              className="shadow-2xl w-[215px] h-[40px] bg-[#FFFFFF] rounded-l-[55px] text-[#000000] pl-14 sm:w-[364px] truncate"
               type="text"
               placeholder="Search artists, songs and playlists"
               id="searchInput"

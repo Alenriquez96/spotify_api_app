@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const useSave = (accessToken: string) => {
+const useSave = (endpoint: string, accessToken: string) => {
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
@@ -12,7 +12,7 @@ const useSave = (accessToken: string) => {
     try {
       await axios({
         method: "put",
-        url: "https://api.spotify.com/v1/me/tracks",
+        url: `https://api.spotify.com/v1/me/${endpoint.split("/")[1]}`,
         data: { ids: [trackId] },
         headers: {
           Authorization: `Bearer ${accessToken}`,

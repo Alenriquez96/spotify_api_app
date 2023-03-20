@@ -1,6 +1,5 @@
 import millisToMinutesAndSeconds from "@/utils/millisToMinutesAndSeconds";
 import { useRouter } from "next/router";
-
 type Tracks = {
   tracks: {
     name: string;

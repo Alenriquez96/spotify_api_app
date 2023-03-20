@@ -16,7 +16,6 @@ const track = () => {
   const [trackData, setTrackData]: any = useState({});
   const spotifyApi = useSpotify();
   const [isSaved, setIsSaved] = useState(false);
-  console.log(isSaved);
 
   const headers = { Authorization: `Bearer ${spotifyApi.getAccessToken()}` };
 
@@ -33,10 +32,7 @@ const track = () => {
     }
   };
 
-  const { savings, isLoading, error } = useSavings(
-    router.asPath,
-    spotifyApi.getAccessToken()
-  );
+  const { savings, isLoading, error } = useSavings(router.asPath);
 
   useEffect(() => {
     if (savings !== null) {
@@ -45,7 +41,10 @@ const track = () => {
     }
   }, [savings]);
 
-  const { saveTrack, isSaving, success } = useSave(spotifyApi.getAccessToken());
+  const { saveTrack, isSaving, success } = useSave(
+    router.asPath,
+    spotifyApi.getAccessToken()
+  );
 
   const handleSaveTrack = () => {
     saveTrack(trackData.id);
@@ -53,6 +52,7 @@ const track = () => {
   };
 
   const { deleteTrack, isDeleted } = useDeleteSaved(
+    router.asPath,
     spotifyApi.getAccessToken()
   );
 
