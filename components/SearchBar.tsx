@@ -297,11 +297,11 @@ const SearchBar = () => {
 
   return (
     <div className="flex items-center w-[100%] justify-evenly">
-      <div className="my-[20px] flex flex-col items-center flex-wrap">
+      <div className="my-[20px] flex flex-col items-center">
         <div>
           <div className="relative flex items-center">
             <input
-              className="shadow-2xl w-[250px] h-[40px] bg-[#FFFFFF] rounded-l-[55px] text-[#000000] px-14 sm:w-[364px]"
+              className="shadow-2xl w-[215px] h-[40px] bg-[#FFFFFF] rounded-l-[55px] text-[#000000] pl-14 sm:w-[364px]"
               type="text"
               placeholder="Search artists, songs and playlists"
               id="searchInput"
@@ -310,7 +310,7 @@ const SearchBar = () => {
             <select
               value={searchBarState}
               onChange={(e: any) => dispatch(addSearch(e.target.value))}
-              className="shadow-2xl h-[40px] bg-[#FFFFFF] rounded-r-[55px] text-[#000000] px-5"
+              className="shadow-2xl h-[40px] bg-[#FFFFFF] rounded-r-[55px] text-[#000000] pl-5"
             >
               {categories.map((category, i) => (
                 <option key={i} value={category}>
