@@ -6,6 +6,7 @@ import SearchBar from "@/components/SearchBar";
 
 import PlaylistTracks from "@/components/PlaylistTracks";
 import PlaylistInfo from "@/components/PlaylistInfo";
+import Layout from "@/components/Layout";
 
 type PlaylistType =
   | {
@@ -43,18 +44,20 @@ const playlist = () => {
   }, [playlist]);
 
   return (
-    <main className="min-h-screen min-w-[100vw] bg-[#383838] font-roboto text-white">
-      <div className="bg-gradient-to-b to-[#383838] from-indigo-500 min-h-[390px] flex flex-col flex-wrap justify-between items-center">
-        <SearchBar />
+    <Layout>
+      <main className="min-h-screen min-w-[100vw] bg-[#383838] font-roboto text-white">
+        <div className="bg-gradient-to-b to-[#383838] from-indigo-500 min-h-[390px] flex flex-col flex-wrap justify-between items-center">
+          <SearchBar />
 
-        <PlaylistInfo info={playlistData} />
-      </div>
-      {playlistData.tracks ? (
-        <PlaylistTracks tracks={playlistData.tracks.items} />
-      ) : (
-        ""
-      )}
-    </main>
+          <PlaylistInfo info={playlistData} />
+        </div>
+        {playlistData.tracks ? (
+          <PlaylistTracks tracks={playlistData.tracks.items} />
+        ) : (
+          ""
+        )}
+      </main>
+    </Layout>
   );
 };
 

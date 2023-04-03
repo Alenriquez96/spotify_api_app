@@ -6,6 +6,7 @@ import useSpotify from "@/hooks/useSpotify";
 import { useEffect, useState } from "react";
 import ShowInfo from "@/components/ShowInfo";
 import ShowEpisodes from "@/components/ShowEpisodes";
+import Layout from "@/components/Layout";
 
 const show = () => {
   const router = useRouter();
@@ -35,16 +36,18 @@ const show = () => {
   }, [show]);
 
   return (
-    <main className="text-white bg-[#383838] font-roboto min-h-screen min-w-[100vw]">
-      <div className="bg-gradient-to-b to-[#383838] from-indigo-500 min-h-[390px] flex flex-col flex-wrap justify-between items-center">
-        <SearchBar />
+    <Layout>
+      <main className="text-white bg-[#383838] font-roboto min-h-screen min-w-[100vw]">
+        <div className="bg-gradient-to-b to-[#383838] from-indigo-500 min-h-[390px] flex flex-col flex-wrap justify-between items-center">
+          <SearchBar />
 
-        {showData.images && <ShowInfo info={showData} isLoading={loading} />}
-      </div>
-      {showData.episodes && (
-        <ShowEpisodes isLoading={loading} episodes={showData.episodes} />
-      )}
-    </main>
+          {showData.images && <ShowInfo info={showData} isLoading={loading} />}
+        </div>
+        {showData.episodes && (
+          <ShowEpisodes isLoading={loading} episodes={showData.episodes} />
+        )}
+      </main>
+    </Layout>
   );
 };
 
