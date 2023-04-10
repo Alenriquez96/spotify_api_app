@@ -23,7 +23,6 @@ const playlist = () => {
   const spotifyApi = useSpotify();
   const headers = { Authorization: `Bearer ${spotifyApi.getAccessToken()}` };
   const [playlistData, setPlaylistData] = useState<PlaylistType>({});
-  console.log(playlistData);
 
   const fetchPlaylistData = async () => {
     if (playlist)

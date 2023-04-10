@@ -6,7 +6,7 @@ const useSave = (endpoint: string, accessToken: string) => {
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
 
-  const saveTrack = async (trackId: string) => {
+  const saveItem = async (trackId: string) => {
     setIsSaving(true);
 
     try {
@@ -27,7 +27,7 @@ const useSave = (endpoint: string, accessToken: string) => {
     }
   };
 
-  return { saveTrack, isSaving, error, success };
+  return { saveItem, isSaving, error, success };
 };
 
 export default useSave;

@@ -33,7 +33,7 @@ const track = () => {
     }
   };
 
-  const { savings, isLoading, error } = useSavings(router.asPath);
+  const { savings } = useSavings(router.asPath);
 
   useEffect(() => {
     if (savings !== null) {
@@ -42,23 +42,20 @@ const track = () => {
     }
   }, [savings]);
 
-  const { saveTrack, isSaving, success } = useSave(
-    router.asPath,
-    spotifyApi.getAccessToken()
-  );
+  const { saveItem } = useSave(router.asPath, spotifyApi.getAccessToken());
 
   const handleSaveTrack = () => {
-    saveTrack(trackData.id);
+    saveItem(trackData.id);
     setIsSaved(true);
   };
 
-  const { deleteTrack, isDeleted } = useDeleteSaved(
+  const { deleteItem } = useDeleteSaved(
     router.asPath,
     spotifyApi.getAccessToken()
   );
 
   const handleDeleteTrack = () => {
-    deleteTrack(trackData.id);
+    deleteItem(trackData.id);
     setIsSaved(false);
   };
 

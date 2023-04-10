@@ -29,7 +29,7 @@ const SimilarTracks = () => {
   }, [track]);
 
   return (
-    <div className="bg-[#2b2929] overflow-x-scroll m-[20px] rounded-lg">
+    <div className="bg-[#2b2929] overflow-x-scroll mt-[20px] mx-[20px] rounded-lg">
       {similarTracks.tracks ? (
         <h2 className="pl-[10%] text-[40px] font-semibold tracking-[4px] my-10">
           SIMILAR SONGS

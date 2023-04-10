@@ -66,7 +66,7 @@ const SearchBar = () => {
   const chooseCase = () => {
     switch (true) {
       case results.tracks && results.tracks.items.length > 0:
-        return results.tracks.items.slice(0, 5).map(
+        return results.tracks.items.slice(0, 10).map(
           (
             item: {
               album: { images: { url: string }[] };
@@ -112,7 +112,7 @@ const SearchBar = () => {
           }
         );
       case results.artists && results.artists.items.length > 0:
-        return results.artists.items.slice(0, 5).map(
+        return results.artists.items.slice(0, 10).map(
           (
             item: {
               images: { url: string }[];
@@ -156,7 +156,7 @@ const SearchBar = () => {
           }
         );
       case results.albums && results.albums.items.length > 0:
-        return results.albums.items.slice(0, 5).map(
+        return results.albums.items.slice(0, 10).map(
           (
             item: {
               images: { url: string }[];
@@ -201,7 +201,7 @@ const SearchBar = () => {
           }
         );
       case results.playlists && results.playlists.items.length > 0:
-        return results.playlists.items.slice(0, 5).map(
+        return results.playlists.items.slice(0, 10).map(
           (
             item: {
               images: { url: string }[];
@@ -246,7 +246,7 @@ const SearchBar = () => {
           }
         );
       case results.shows && results.shows.items.length > 0:
-        return results.shows.items.slice(0, 5).map(
+        return results.shows.items.slice(0, 10).map(
           (
             item: {
               images: { url: string }[];

@@ -4,7 +4,7 @@ import axios from "axios";
 const useDeleteSaved = (endpoint: string, accessToken: string) => {
   const [isDeleted, setIsDeleted] = useState(false);
 
-  const deleteTrack = async (trackId: string) => {
+  const deleteItem = async (trackId: string) => {
     try {
       await axios({
         method: "delete",
@@ -22,7 +22,7 @@ const useDeleteSaved = (endpoint: string, accessToken: string) => {
     }
   };
 
-  return { deleteTrack, isDeleted };
+  return { deleteItem, isDeleted };
 };
 
 export default useDeleteSaved;
